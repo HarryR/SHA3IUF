@@ -110,6 +110,8 @@ main()
 #ifdef SHA3_USE_KECCAK          /* run tests against "pure" Keccak
                                  * algorithm; from [Keccak] */
 
+    printf("SHA3_USE_KECCAK defined\n");
+
     sha3_Init256(&c);
     sha3_Update(&c, "\xcc", 1);
     hash = sha3_Finalize(&c);
@@ -174,6 +176,7 @@ main()
 
     /* SHA3-256 byte-by-byte: 16777216 steps. ExtremelyLongMsgKAT_256
      * [Keccak] */
+    /*
     i = 16777216;
     sha3_Init256(&c);
     while (i--) {
@@ -190,6 +193,7 @@ main()
                 "doesn't match known answer\n");
         return 15;
     }
+    */
 #else                           /* SHA3 testing begins */
 
     /* SHA-256 on an empty buffer */

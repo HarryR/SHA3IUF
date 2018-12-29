@@ -14,6 +14,7 @@ target_include_directories(SHA3IUF PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(${SHA3_USE_KECCAK})
 	target_compile_definitions(SHA3IUF PRIVATE SHA3_USE_KECCAK=1)
+	target_compile_definitions(SHA3IUF PUBLIC SHA3_USE_KECCAK=1)
 endif()
 
 add_executable(sha3sum ${CMAKE_CURRENT_SOURCE_DIR}/sha3sum.c)
