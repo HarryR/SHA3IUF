@@ -1,3 +1,6 @@
+include(CTest)
+enable_testing()
+
 option(
   SHA3_USE_KECCAK
   "Use the Keccak variant, 0x6 rather than 0x1 for padding prefix"

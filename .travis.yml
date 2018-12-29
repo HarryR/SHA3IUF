@@ -1,0 +1,11 @@
+matrix:
+  include:
+    - os: linux
+      language: cpp
+    - os: osx
+      language: cpp
+script:
+  - mkdir -p build && cd build && cmake ..
+  - make -C build
+after_success:
+  - ./build/sha3test
