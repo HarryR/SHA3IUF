@@ -168,7 +168,7 @@ sha3_Update(void *priv, void const *bufIn, size_t len)
 
     if(len < old_tail) {        /* have no complete word or haven't started 
                                  * the word yet */
-        SHA3_TRACE("because %d<%d, store it and return", (unsigned)len,
+        SHA3_TRACE("because %u<%u, store it and return", (unsigned)len,
                 (unsigned)old_tail);
         /* endian-independent code follows: */
         while (len--)
@@ -178,7 +178,7 @@ sha3_Update(void *priv, void const *bufIn, size_t len)
     }
 
     if(old_tail) {              /* will have one word to process */
-        SHA3_TRACE("completing one word with %d bytes", (unsigned)old_tail);
+        SHA3_TRACE("completing one word with %u bytes", (unsigned)old_tail);
         /* endian-independent code follows: */
         len -= old_tail;
         while (old_tail--)
@@ -203,7 +203,7 @@ sha3_Update(void *priv, void const *bufIn, size_t len)
     words = len / sizeof(uint64_t);
     tail = len - words * sizeof(uint64_t);
 
-    SHA3_TRACE("have %d full words to process", (unsigned)words);
+    SHA3_TRACE("have %u full words to process", (unsigned)words);
 
     for(i = 0; i < words; i++, buf += sizeof(uint64_t)) {
         const uint64_t t = (uint64_t) (buf[0]) |
@@ -225,7 +225,7 @@ sha3_Update(void *priv, void const *bufIn, size_t len)
         }
     }
 
-    SHA3_TRACE("have %d bytes left to process, save them", (unsigned)tail);
+    SHA3_TRACE("have %u bytes left to process, save them", (unsigned)tail);
 
     /* finally, save the partial word */
     SHA3_ASSERT(ctx->byteIndex == 0 && tail < 8);
@@ -246,7 +246,7 @@ sha3_Finalize(void *priv)
 {
     sha3_context *ctx = (sha3_context *) priv;
 
-    SHA3_TRACE("called with %d bytes in the buffer", ctx->byteIndex);
+    SHA3_TRACE("called with %u bytes in the buffer", ctx->byteIndex);
 
     /* Append 2-bit suffix 01, per SHA-3 spec. Instead of 1 for padding we
      * use 1<<2 below. The 0x02 below corresponds to the suffix 01.
