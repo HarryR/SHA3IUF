@@ -1,6 +1,10 @@
 #ifndef SHA3_H
 #define SHA3_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* -------------------------------------------------------------------------
  * Works when compiled for either 32-bit or 64-bit targets, optimized for 
  * 64 bit.
@@ -46,5 +50,10 @@ void sha3_Init512(void *priv);
 void sha3_Update(void *priv, void const *bufIn, size_t len);
 
 void const *sha3_Finalize(void *priv);
+
+#ifdef __cplusplus
+// extern "C"
+}
+#endif
 
 #endif
