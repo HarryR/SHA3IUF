@@ -5,6 +5,4 @@ matrix:
     - os: osx
       language: cpp
 script:
-  - mkdir -p build && cd build && cmake .. && make
-after_success:
-  - make -C build test
+  - mkdir -p build && cd build && cmake .. && make && make test
