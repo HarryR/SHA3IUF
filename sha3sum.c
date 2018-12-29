@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     int image_size;
     const char *file_path;
     FILE* fd;
+    int i;
 
     if( argc != 3 ) {
 	    help(argv[0]);
@@ -101,7 +102,7 @@ int main(int argc, char *argv[])
 
     hash = sha3_Finalize(&c);
 
-    for(int i=0; i<image_size/8; i++) {
+    for(i=0; i<image_size/8; i++) {
 	    char s[3];
 	    byte_to_hex(hash[i],s);
 	    printf("%s", s);
