@@ -14,13 +14,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <stdlib.h>
-#include <sys/mman.h>
 
 #include "sha3.h"
 
@@ -50,10 +44,7 @@ int main(int argc, char *argv[])
     const uint8_t *hash;
     int image_size;
     const char *file_path;
-    int fd;
-    struct stat st;
-    void *p;
-    unsigned i;
+    FILE* fd;
 
     if( argc != 3 ) {
 	    help(argv[0]);
@@ -72,27 +63,10 @@ int main(int argc, char *argv[])
     }
 
     file_path = argv[2];
-    if( access(file_path, R_OK)!=0 ) {
-	    printf("Cannot read file '%s'", file_path);
-	    return 2;
-    }
 
-    fd = open(file_path, O_RDONLY);
-    if( fd == -1 ) {
+    fd = fopen(file_path, "r");
+    if( fd == NULL ) {
 	    printf("Cannot open file '%s' for reading", file_path);
-	    return 2;
-    }
-    i = fstat(fd, &st);
-    if( i ) {
-	    close(fd);
-	    printf("Cannot determine the size of file '%s'", file_path);
-	    return 2;
-    }
-
-    p = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
-    close(fd);
-    if( p==NULL ) {
-	    printf("Cannot memory-map file '%s'", file_path);
 	    return 2;
     }
 
@@ -108,12 +82,26 @@ int main(int argc, char *argv[])
 		break;
     }
 
-    sha3_Update(&c, p, st.st_size);
+    while( 1 )
+    {
+        char buffer[1024];
+        size_t nbytes = fread(buffer, 1024, 1, fd);
+
+        if( nbytes > 0 ) {
+            sha3_Update(&c, buffer, 1024);
+        }
+
+        if( nbytes != 1024 )
+        {
+            break;
+        }
+    }
+
+    fclose(fd);
+
     hash = sha3_Finalize(&c);
 
-    munmap(p, st.st_size);
-
-    for(i=0; i<image_size/8; i++) {
+    for(int i=0; i<image_size/8; i++) {
 	    char s[3];
 	    byte_to_hex(hash[i],s);
 	    printf("%s", s);
