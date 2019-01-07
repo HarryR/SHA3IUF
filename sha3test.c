@@ -119,7 +119,7 @@ main()
                     "\xca\xed\xc0\x44\x69\x6a\x16\x88"
                     "\x70\x54\x9a\x6a\x7f\x6f\x56\x96"
                     "\x1e\x84\xa5\x4b\xd9\x97\x0b\x8a", 256 / 8) != 0) {
-        printf("SHA3-256(cc) "
+        printf("KECCAK-256(cc) "
                 "doesn't match known answer (single buffer)\n");
         return 11;
     }
@@ -131,7 +131,7 @@ main()
                     "\x1a\x79\x5a\xd9\xe1\xea\x21\x22"
                     "\xb4\x07\xba\xf9\xaa\xbc\xb9\xe1"
                     "\x8b\x57\x17\xb7\x87\x35\x37\xd2", 256 / 8) != 0) {
-        printf("SHA3-256(41fb) "
+        printf("KECCAK-256(41fb) "
                 "doesn't match known answer (single buffer)\n");
         return 12;
     }
@@ -145,7 +145,7 @@ main()
                     "\xac\x0e\x6a\x10\x8b\x84\x2e\xd0"
                     "\xf1\xd3\x24\x97\x12\xf5\x8e\xe0"
                     "\xdd\xf9\x56\xfe\x33\x2a\x5f\x95", 256 / 8) != 0) {
-        printf("SHA3-256(52a6...76) "
+        printf("KECCAK-256(52a6...76) "
                 "doesn't match known answer (single buffer)\n");
         return 13;
     }
@@ -169,7 +169,7 @@ main()
                     "\x99\x22\x16\x58\xf8\x01\xd4\x5c"
                     "\x29\x4d\x90\x06\xee\x9f\x3f\x9d"
                     "\x41\x9c\x8d\x42\x77\x48\xdc\x41", 256 / 8) != 0) {
-        printf("SHA3-256(433C...CE) "
+        printf("KECCAK-256(433C...CE) "
                 "doesn't match known answer (single buffer)\n");
         return 14;
     }
