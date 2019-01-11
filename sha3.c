@@ -1,3 +1,6 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 /* -------------------------------------------------------------------------
  * Works when compiled for either 32-bit or 64-bit targets, optimized for 
  * 64 bit.
