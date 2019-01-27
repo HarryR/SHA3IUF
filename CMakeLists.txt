@@ -18,10 +18,10 @@ endif()
 add_executable(sha3sum ${CMAKE_CURRENT_SOURCE_DIR}/sha3sum.c)
 target_link_libraries(sha3sum SHA3IUF)
 
-if(NOT ${SHA3IUF_DISABLE_TESTS})
-	include(CTest)
-	enable_testing()
+include(CTest)
+enable_testing()
 
+if(NOT ${SHA3IUF_DISABLE_TESTS})
 	add_executable(sha3test ${CMAKE_CURRENT_SOURCE_DIR}/sha3test.c)
 	target_link_libraries(sha3test SHA3IUF)
 	add_test(NAME run_sha3test COMMAND sha3test)
