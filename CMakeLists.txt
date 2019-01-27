@@ -6,6 +6,8 @@ option(
   ON
 )
 
+option(SHA3IUF_DISABLE_TESTS "Disable ethsnarks tests" OFF)
+
 add_library(SHA3IUF STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sha3.c)
 target_include_directories(SHA3IUF PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
