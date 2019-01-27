@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 
-include(CTest)
-enable_testing()
-
 option(
   SHA3_USE_KECCAK
   "Use the Keccak variant, 0x6 rather than 0x1 for padding prefix"
@@ -21,6 +18,11 @@ endif()
 add_executable(sha3sum ${CMAKE_CURRENT_SOURCE_DIR}/sha3sum.c)
 target_link_libraries(sha3sum SHA3IUF)
 
-add_executable(sha3test ${CMAKE_CURRENT_SOURCE_DIR}/sha3test.c)
-target_link_libraries(sha3test SHA3IUF)
-add_test(NAME run_sha3test COMMAND sha3test)
+if(NOT ${SHA3IUF_DISABLE_TESTS})
+	include(CTest)
+	enable_testing()
+
+	add_executable(sha3test ${CMAKE_CURRENT_SOURCE_DIR}/sha3test.c)
+	target_link_libraries(sha3test SHA3IUF)
+	add_test(NAME run_sha3test COMMAND sha3test)
+endif()
